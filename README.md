@@ -1,6 +1,6 @@
 # 🌐 Chaerul Hidayat — IT Support Specialist | Workflow Automation | AI-Driven Helpdesk
 
-> Technical portfolio of **Chaerul Hidayat** ([@ChaerulHidayat17](https://github.com/ChaerulHidayat17)) based in **Cikarang Utara, West Java, Indonesia**.  
+> Technical portfolio of **Chaerul Hidayat** ([@ChaerulHidayat17](https://github.com/ChaerulHidayat17)).  
 > Specializing in enterprise zero-touch workstation provisioning, automated IT asset management (ITAM), and AI-driven helpdesk operations.
 
 🌐 **Live Portfolio Website**: [https://chaerulhidayat17.github.io/portfolio/](https://chaerulhidayat17.github.io/portfolio/)  
