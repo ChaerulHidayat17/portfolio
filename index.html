@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full scroll-smooth bg-slate-50 text-slate-800">
+<html lang="id" class="h-full scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaerul Hidayat - Enterprise IT Infrastructure & Systems Engineering Portfolio</title>
     
-    <!-- Meta tags for MagangHub & LinkedIn preview -->
-    <meta name="description" content="Portfolio of Chaerul Hidayat: Enterprise IT Infrastructure, Systems Engineering, Zero-Touch Workstation Provisioning, and Automated IT Asset Management.">
+    <meta name="description" content="Technical Portfolio of Chaerul Hidayat: Enterprise IT Infrastructure, Zero-Touch Workstation Provisioning, Automated ITAM, and Linux Server Telemetry.">
     <meta name="author" content="Chaerul Hidayat">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
+                        slate: {
+                            850: '#151e2e',
+                            950: '#070b12',
+                        },
                         brand: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            500: '#0284c7',
-                            600: '#0369a1',
-                            700: '#075985',
-                            900: '#0c4a6e',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
                         }
                     }
                 }
             }
         }
     </script>
+
+    <!-- JsBarcode & QRCode.js for interactive AssetDesk demo -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,273 +47,464 @@
         .font-mono {
             font-family: 'JetBrains Mono', monospace !important;
         }
+        
+        /* Grid technical background */
+        .tech-grid {
+            background-size: 32px 32px;
+            background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+        }
+        .dark .tech-grid {
+            background-image: radial-gradient(rgba(51, 65, 85, 0.45) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism accents */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-full flex flex-col bg-slate-50 text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
+<body class="min-h-full flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 antialiased selection:bg-slate-900 selection:text-white dark:selection:bg-blue-600 transition-colors duration-200">
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <!-- TOP NAVIGATION -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             
             <!-- Brand Mark -->
-            <a href="#" class="flex items-center gap-2.5 group">
-                <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs shadow-xs group-hover:bg-slate-800 transition">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold text-xs shadow-sm transition">
                     CH
                 </div>
                 <div>
-                    <span class="text-sm font-extrabold tracking-tight text-slate-900 block leading-none">Chaerul Hidayat</span>
-                    <span class="text-[11px] text-slate-500 font-medium">IT Infrastructure &amp; Systems</span>
+                    <span class="text-sm font-extrabold tracking-tight text-slate-900 dark:text-white block leading-none">Chaerul Hidayat</span>
+                    <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">IT Infrastructure &amp; Systems</span>
                 </div>
             </a>
 
-            <!-- Nav Links & Status -->
+            <!-- Right Actions: Status Badge, Links, Theme Toggle -->
             <div class="flex items-center gap-2 sm:gap-4">
-                <div class="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+                
+                <!-- Live Availability Badge -->
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Ready for MagangHub / Internship</span>
+                    <span>Ready for MagangHub / IT Internship</span>
                 </div>
 
-                <a href="#projects" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 transition">
-                    Systems
-                </a>
-                <a href="#competencies" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 transition">
-                    Competencies
-                </a>
+                <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                    <a href="#systems" class="px-3 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition">Systems</a>
+                    <a href="#competencies" class="px-3 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition">Competencies</a>
+                    <a href="#contact" class="px-3 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition">Contact</a>
+                </nav>
 
-                <a href="https://github.com/ChaerulHidayat17" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition active:scale-95">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer" title="Toggle Light/Dark Theme">
+                    <svg id="sun-icon" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg id="moon-icon" class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <a href="https://github.com/ChaerulHidayat17" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold shadow-xs transition active:scale-95">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                     </svg>
                     <span>GitHub</span>
                 </a>
+
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="border-b border-slate-200/80 bg-white py-14 sm:py-20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
+    <!-- HERO SECTION (ASYMMETRIC SPLIT) -->
+    <section class="tech-grid border-b border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-950/70 py-12 sm:py-16 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
             
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200">
-                <span class="font-mono text-slate-500">IT SUPPORT &amp; INFRASTRUCTURE</span>
-                <span class="text-slate-300">/</span>
-                <span>SYSTEMS AUTOMATION</span>
-            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                
+                <!-- Left: Identity & Core Value Prop (7 cols) -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-800">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                        <span class="font-mono text-slate-500 dark:text-slate-400">IT SYSTEMS ENGINEER</span>
+                        <span class="text-slate-300 dark:text-slate-700">/</span>
+                        <span>ENDPOINT AUTOMATION</span>
+                    </div>
 
-            <div class="space-y-3 max-w-4xl">
-                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                    Engineering Zero-Touch Workstation Automation &amp; Resilient IT Infrastructure.
-                </h1>
-                <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-                    Portofolio teknis Chaerul Hidayat: Otomasi deployment endpoint Windows/Linux, manajemen inventaris perangkat keras perusahaan (ITAM), dan telemetri server headless.
-                </p>
-            </div>
+                    <div class="space-y-3">
+                        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                            Engineering Zero-Touch Systems &amp; Resilient IT Infrastructure.
+                        </h1>
+                        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
+                            Spesialis otomasi provisioning workstation Windows, audit perangkat keras enterprise (ITAM), serta telemetri server Linux headless untuk operasional IT modern.
+                        </p>
+                    </div>
 
-            <!-- Quick Action Buttons -->
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-                <a href="#projects" class="px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition active:scale-95 flex items-center gap-2">
-                    <span>Lihat Proyek Rekayasa</span>
-                    <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <polyline points="19 12 12 19 5 12"></polyline>
-                    </svg>
-                </a>
-                <a href="https://linkedin.com/in/chaerul-hidayat" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 shadow-xs transition">
-                    LinkedIn Profile
-                </a>
-                <a href="mailto:chaerulhidayat70@gmail.com" class="px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 shadow-xs transition">
-                    Hubungi via Email
-                </a>
-            </div>
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-3 pt-1">
+                        <a href="#systems" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold shadow-sm transition active:scale-95 flex items-center gap-2">
+                            <span>Jelajahi Sistem Rekayasa</span>
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/chaerul-hidayat" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-slate-700 shadow-xs transition">
+                            LinkedIn Profile
+                        </a>
+                        <button onclick="copyContactEmail()" class="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-slate-700 shadow-xs transition cursor-pointer">
+                            <span id="copy-email-btn">Salin Email</span>
+                        </button>
+                    </div>
 
-            <!-- Quantitative Engineering Highlights -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-slate-100">
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                    <div class="text-xl sm:text-2xl font-extrabold font-mono text-slate-900 tracking-tight">&lt; 5 Menit</div>
-                    <div class="text-[11px] text-slate-500 font-medium mt-0.5">Zero-Touch Workstation Provisioning</div>
+                    <!-- Quantitative Engineering Highlights -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+                            <div class="text-lg sm:text-xl font-extrabold font-mono text-slate-900 dark:text-white tracking-tight">&lt; 5 Menit</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">Zero-Touch Provisioning</div>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+                            <div class="text-lg sm:text-xl font-extrabold font-mono text-slate-900 dark:text-white tracking-tight">49,000+</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">IEEE OUI MAC Database</div>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+                            <div class="text-lg sm:text-xl font-extrabold font-mono text-slate-900 dark:text-white tracking-tight">Rp 1.3B+</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">Turnover Operations</div>
+                        </div>
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+                            <div class="text-lg sm:text-xl font-extrabold font-mono text-slate-900 dark:text-white tracking-tight">100% Agentless</div>
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">Kernel &amp; WMI Discovery</div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                    <div class="text-xl sm:text-2xl font-extrabold font-mono text-slate-900 tracking-tight">49,000+</div>
-                    <div class="text-[11px] text-slate-500 font-medium mt-0.5">Hardware IEEE OUI Database Fingerprints</div>
+
+                <!-- Right: Interactive Live Terminal Simulator (5 cols) -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-900 dark:bg-black rounded-2xl border border-slate-800 shadow-2xl overflow-hidden text-xs font-mono">
+                        
+                        <!-- Terminal Titlebar with Interactive Tabs -->
+                        <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                            </div>
+                            <div class="flex items-center gap-1 text-[11px] font-semibold text-slate-400">
+                                <button onclick="runTerminalTab('deskcraft')" id="term-tab-1" class="px-2 py-0.5 rounded bg-slate-800 text-emerald-400 transition cursor-pointer">deskcraft.ps1</button>
+                                <button onclick="runTerminalTab('assetdesk')" id="term-tab-2" class="px-2 py-0.5 rounded hover:bg-slate-800 text-slate-400 transition cursor-pointer">assetdesk.ps1</button>
+                                <button onclick="runTerminalTab('nodepulse')" id="term-tab-3" class="px-2 py-0.5 rounded hover:bg-slate-800 text-slate-400 transition cursor-pointer">nodepulse.sh</button>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Screen -->
+                        <div class="p-4 space-y-2.5 min-h-[260px] text-slate-300 leading-relaxed overflow-x-auto select-all" id="terminal-screen">
+                            <div class="text-slate-500 select-none"># Klik tab di atas untuk simulasi eksekusi perintah otomasi riil</div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-emerald-400 select-none">PS C:\&gt;</span>
+                                <span class="text-white font-bold" id="term-cmd">irm https://it-setup-portal-app.vercel.app/run | iex</span>
+                            </div>
+                            <div class="space-y-1 text-slate-400 text-[11px] pt-1" id="term-output">
+                                <div class="text-blue-400">[+] Verifying Administrator Integrity... Elevated OK</div>
+                                <div class="text-emerald-400">[+] Winget Package Engine initialized</div>
+                                <div>[1/4] Installing Google Chrome Enterprise... <span class="text-emerald-400">Done (32s)</span></div>
+                                <div>[2/4] Deploying Slack &amp; Zoom Workplace... <span class="text-emerald-400">Done (41s)</span></div>
+                                <div>[3/4] Enforcing Cloudflare 1.1.1.1 Secure DNS... <span class="text-emerald-400">Done</span></div>
+                                <div>[4/4] Applying Windows 11 Privacy Baseline... <span class="text-emerald-400">Done</span></div>
+                                <div class="text-emerald-300 font-bold pt-1">[SUCCESS] Workstation provisioned in 2m 14s (0 disk leftovers)</div>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Footer Quick Action -->
+                        <div class="px-4 py-2.5 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                <span>Zero-Disk Residual Execution</span>
+                            </span>
+                            <button onclick="copyCurrentTerminalCmd()" class="text-emerald-400 hover:text-emerald-300 font-semibold cursor-pointer">
+                                Salin Command
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                    <div class="text-xl sm:text-2xl font-extrabold font-mono text-slate-900 tracking-tight">Rp 1.3B+</div>
-                    <div class="text-[11px] text-slate-500 font-medium mt-0.5">Turnover Operations &amp; Bookkeeping</div>
-                </div>
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                    <div class="text-xl sm:text-2xl font-extrabold font-mono text-slate-900 tracking-tight">100% Agentless</div>
-                    <div class="text-[11px] text-slate-500 font-medium mt-0.5">Kernel &amp; WMI Automated Discovery</div>
-                </div>
+
             </div>
 
         </div>
     </section>
 
-    <!-- CORE PROJECTS SHOWCASE -->
-    <section id="projects" class="py-14 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-10">
+    <!-- CORE SYSTEMS SHOWCASE (BENTO GRID WITH DISTINCT VISUAL IDENTITIES) -->
+    <section id="systems" class="py-14 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-8">
         
-        <div class="space-y-1">
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                Featured Engineering Systems
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-500 max-w-xl">
-                Arsitektur sistem nyata yang dibangun untuk mengotomatisasi alur kerja operasional IT, inventaris perangkat keras, dan telemetri server.
-            </p>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div class="space-y-1">
+                <div class="text-xs font-bold font-mono text-blue-600 dark:text-blue-400 uppercase tracking-wider">PRODUCTION SYSTEMS</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    Featured Engineering Projects
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl">
+                    Implementasi arsitektur nyata yang memecahkan masalah operasional workstation, inventaris IT enterprise, dan telemetri server.
+                </p>
+            </div>
+            <div class="text-xs text-slate-400 font-mono">
+                Semua proyek open-source di GitHub
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- BENTO CONTAINER -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
 
-            <!-- PROJECT 1: DESKCRAFT -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col justify-between space-y-5 hover:border-slate-300 transition">
+            <!-- BENTO 1: DESKCRAFT (8 COLS WIDE) -->
+            <div class="md:col-span-12 lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition flex flex-col justify-between space-y-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                             WORKSTATION PROVISIONING
                         </span>
-                        <span class="text-xs font-mono text-slate-400 font-semibold">Port 8000 / Live Vercel</span>
+                        <span class="text-xs font-mono text-slate-400">Vercel Production</span>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">DeskCraft</h3>
-                        <p class="text-xs font-medium text-slate-500 mt-0.5">Precision Zero-Touch Workstation Provisioning Platform</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">DeskCraft</h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Precision Zero-Touch Workstation Provisioning Platform</p>
                     </div>
 
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Platform otomasi deployment laptop baru karyawan. Meng-generate skrip in-memory satu baris PowerShell (<code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-[11px] font-mono font-bold">irm ... | iex</code>) untuk instalasi aplikasi massal via Winget, optimasi DNS Cloudflare, konfigurasi timezone, dan baseline hardening Windows tanpa file installer tersisa di disk.
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Platform otomasi deployment laptop baru karyawan. Meng-generate skrip in-memory satu baris PowerShell untuk instalasi aplikasi massal via Winget, optimasi DNS Cloudflare, konfigurasi timezone, dan baseline hardening Windows tanpa file installer tersisa di disk.
                     </p>
 
-                    <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">PowerShell WMI</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Winget Unattended</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">FastAPI</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Tailwind CSS</span>
+                    <!-- Interactive Preset Selector -->
+                    <div class="space-y-2 pt-1">
+                        <div class="text-[11px] font-bold text-slate-700 dark:text-slate-300">Pilih Preset Role untuk Mengubah Skrip Otomatis:</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button onclick="setDeskcraftRole('office')" id="role-btn-office" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-900 dark:bg-white text-white dark:text-slate-900 transition cursor-pointer">Staff &amp; Office</button>
+                            <button onclick="setDeskcraftRole('engineer')" id="role-btn-engineer" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition cursor-pointer">Software Engineer</button>
+                            <button onclick="setDeskcraftRole('support')" id="role-btn-support" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition cursor-pointer">IT Support</button>
+                            <button onclick="setDeskcraftRole('creative')" id="role-btn-creative" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition cursor-pointer">Creative Media</button>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic One-Liner Snippet Box -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-3 text-xs font-mono">
+                        <div class="truncate text-emerald-400 select-all" id="deskcraft-cmd-snippet">
+                            irm "https://it-setup-portal-app.vercel.app/run?apps=chrome,zoom,slack,7zip" | iex
+                        </div>
+                        <button onclick="copyDeskcraftCmd()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-sans font-semibold shrink-0 transition cursor-pointer">
+                            Salin
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-[11px] font-mono">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">66 Apps Catalog</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Auto-Elevate Admin</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Desktop Shortcuts</span>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100 flex items-center gap-2">
-                    <a href="https://it-setup-portal-app.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold text-center transition shadow-xs">
-                        Buka Live Portal
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                    <a href="https://it-setup-portal-app.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
+                        Buka Live Web App
                     </a>
-                    <a href="https://github.com/ChaerulHidayat17/deskcraft" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold text-center transition">
+                    <a href="https://github.com/ChaerulHidayat17/deskcraft" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center transition">
                         Source Code
                     </a>
                 </div>
             </div>
 
-            <!-- PROJECT 2: ASSETDESK -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col justify-between space-y-5 hover:border-slate-300 transition">
+            <!-- BENTO 2: ASSETDESK (5 COLS WIDE WITH LIVE INTERACTIVE BARCODE/QR) -->
+            <div class="md:col-span-12 lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition flex flex-col justify-between space-y-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            ENTERPRISE ITAM
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            HARDWARE INVENTORY (ITAM)
                         </span>
-                        <span class="text-xs font-mono text-slate-400 font-semibold">Port 8050</span>
+                        <span class="text-xs font-mono text-slate-400">Port 8050</span>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">AssetDesk</h3>
-                        <p class="text-xs font-medium text-slate-500 mt-0.5">Automated Hardware Inventory &amp; Mass Fleet Rollout</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">AssetDesk</h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Automated Hardware Discovery &amp; Mass Fleet Rollout</p>
                     </div>
 
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Sistem manajemen aset laptop enterprise berbasis web. Mengekstrak serial number asli BIOS, CPU, RAM GB, dan SSD secara agentless. Dilengkapi modul <b>Mass Division Audit</b> (remote push PowerShell WinRM ke 20+ laptop divisi serentak, draft pesan WA 1-klik, dan skrip GPO Active Directory), serta generator stiker barcode fisik Code 128 &amp; QR Code.
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Sistem audit laptop enterprise berbasis web. Mengekstrak serial number asli BIOS, CPU, RAM GB, dan SSD secara agentless. Dilengkapi modul Mass Division Audit (remote push WinRM 20+ laptop) dan cetak stiker label fisik Code 128 barcode.
                     </p>
 
-                    <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Hardware BIOS/CIM</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">49k IEEE OUI</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Code 128 Barcode</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">WinRM Remote</span>
+                    <!-- Interactive Barcode / Asset Tag Widget -->
+                    <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="font-bold text-slate-700 dark:text-slate-300">Live Asset Tag Generator:</span>
+                            <span class="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold">Code 128 + QR</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="text" id="interactive-tag-input" value="AST-2026-0001" oninput="renderDemoBarcode()" class="flex-1 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono font-bold text-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                            <span class="text-[10px] text-slate-400">Ketik untuk tes</span>
+                        </div>
+                        <!-- Canvas for barcode -->
+                        <div class="bg-white rounded-lg p-2 flex items-center justify-between border border-slate-200">
+                            <svg id="demo-barcode-svg" class="max-w-[140px]"></svg>
+                            <div id="demo-qr-box" class="w-10 h-10 p-0.5 bg-white border border-slate-200 rounded"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-[11px] font-mono">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">WMI/CIM Kernel</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Mass Push WinRM</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Active Directory GPO</span>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100 flex items-center gap-2">
-                    <a href="https://github.com/ChaerulHidayat17/assetdesk" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold text-center transition shadow-xs">
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                    <a href="https://github.com/ChaerulHidayat17/assetdesk" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
                         Lihat Dokumentasi &amp; Kode
                     </a>
                 </div>
             </div>
 
-            <!-- PROJECT 3: NODEPULSE -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col justify-between space-y-5 hover:border-slate-300 transition">
+            <!-- BENTO 3: NODEPULSE (6 COLS) -->
+            <div class="md:col-span-12 lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition flex flex-col justify-between space-y-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
-                            SERVER TELEMETRY
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                            HEADLESS SERVER TELEMETRY
                         </span>
-                        <span class="text-xs font-mono text-slate-400 font-semibold">Port 9090</span>
+                        <span class="text-xs font-mono text-slate-400">Port 9090</span>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">NodePulse</h3>
-                        <p class="text-xs font-medium text-slate-500 mt-0.5">Headless Server Telemetry &amp; Power Intelligence</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">NodePulse</h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Linux Server Telemetry &amp; Battery Power Intelligence</p>
                     </div>
 
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Platform pemantauan telemetri real-time untuk server Linux headless (laptop yang dialihfungsikan menjadi server 24/7). Mengintegrasikan kernel sysfs (<code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-[11px] font-mono font-bold">BAT0</code>) untuk memantau status watt pengisian daya, degradasi baterai, proteksi overheat thermal, utilisasi CPU, dan performa disk I/O.
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Platform monitoring untuk laptop yang dialihfungsikan menjadi server Linux headless 24/7. Mengintegrasikan kernel sysfs (<code class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-1 py-0.5 rounded text-[11px] font-mono font-bold">BAT0</code>) untuk memantau status watt pengisian daya, degradasi baterai, proteksi overheat thermal, utilisasi CPU, dan performa disk I/O.
                     </p>
 
-                    <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Linux Sysfs</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">psutil</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Systemd Daemon</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Thermal Monitoring</span>
+                    <!-- Real-Time Telemetry Simulation Card -->
+                    <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 grid grid-cols-3 gap-2 text-center font-mono">
+                        <div class="p-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800">
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400">CPU LOAD</div>
+                            <div class="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">4.2%</div>
+                            <div class="text-[9px] text-slate-400">4 Cores Active</div>
+                        </div>
+                        <div class="p-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800">
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400">BATTERY</div>
+                            <div class="text-sm font-bold text-blue-600 dark:text-blue-400 mt-0.5">85%</div>
+                            <div class="text-[9px] text-slate-400">AC Online / 14W</div>
+                        </div>
+                        <div class="p-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800">
+                            <div class="text-[10px] text-slate-500 dark:text-slate-400">THERMAL</div>
+                            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">44°C</div>
+                            <div class="text-[9px] text-emerald-500">Normal State</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-[11px] font-mono">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Linux Sysfs</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">psutil Pipeline</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Systemd Daemon</span>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100 flex items-center gap-2">
-                    <a href="https://github.com/ChaerulHidayat17/nodepulse" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold text-center transition shadow-xs">
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                    <a href="https://github.com/ChaerulHidayat17/nodepulse" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
                         Lihat Dokumentasi &amp; Kode
                     </a>
                 </div>
             </div>
 
-            <!-- PROJECT 4: GADGETFLOW -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col justify-between space-y-5 hover:border-slate-300 transition">
+            <!-- BENTO 4: GADGETFLOW (6 COLS) -->
+            <div class="md:col-span-12 lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition flex flex-col justify-between space-y-6">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-                            BUSINESS OPERATIONS BOT
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                            OPERATIONS BOT &amp; ERP
                         </span>
-                        <span class="text-xs font-mono text-slate-400 font-semibold">Port 8080 / Telegram Bot</span>
+                        <span class="text-xs font-mono text-slate-400">Port 8080 / Telegram</span>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">GadgetFlow</h3>
-                        <p class="text-xs font-medium text-slate-500 mt-0.5">Smartphone Reseller Inventory &amp; Telegram Bot Operations</p>
+                        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">GadgetFlow</h3>
+                        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Smartphone Reseller Inventory &amp; Telegram Bot Operations</p>
                     </div>
 
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         Platform operasional bisnis perputaran unit smartphone (>150 unit, perputaran omset >Rp 1.3 Miliar). Menggabungkan dashboard pembukuan web lokal dengan Bot Telegram interaktif untuk pencatatan transaksi penjualan instan, filter stok cepat berdasarkan seri brand, serta kalkulasi margin laba harian secara real-time.
                     </p>
 
-                    <div class="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Telegram Bot API</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Asyncio Event Loop</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">SQLite Transactions</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Financial Reporting</span>
+                    <!-- Telegram Bot Simulated Dialogue -->
+                    <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-3 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 justify-end">
+                            <div class="bg-blue-600 text-white px-3 py-1.5 rounded-2xl rounded-tr-none text-[11px] max-w-[80%]">
+                                /stok IPHONE 15 PINK
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                                GF
+                            </div>
+                            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 px-3 py-1.5 rounded-2xl rounded-tl-none text-[11px] font-mono leading-relaxed max-w-[85%]">
+                                <b>GADGETFLOW STOCK REPORT</b><br>
+                                • Unit: iPhone 15 Pink 128GB (Mulus 99%)<br>
+                                • Status: READY DI GUDANG (Modal Rp 10.8jt)<br>
+                                • Margin Estimasi: +Rp 950.000
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-[11px] font-mono">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Telegram Bot API</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Asyncio Event Loop</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Daily P&amp;L Tracking</span>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100 flex items-center gap-2">
-                    <a href="https://github.com/ChaerulHidayat17/gadgetflow" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold text-center transition shadow-xs">
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                    <a href="https://github.com/ChaerulHidayat17/gadgetflow" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
                         Lihat Dokumentasi &amp; Kode
                     </a>
                 </div>
             </div>
 
         </div>
+
     </section>
 
     <!-- TECHNICAL COMPETENCY MATRIX -->
-    <section id="competencies" class="border-t border-slate-200/80 bg-white py-14 sm:py-20">
+    <section id="competencies" class="border-t border-slate-200/80 dark:border-slate-800 bg-white/60 dark:bg-slate-950/60 py-14 sm:py-20 transition-colors">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
             
             <div class="space-y-1">
-                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                    Technical Competencies &amp; Toolchain
+                <div class="text-xs font-bold font-mono text-blue-600 dark:text-blue-400 uppercase tracking-wider">SKILL TREE &amp; TOOLCHAIN</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    Technical Competencies Matrix
                 </h2>
-                <p class="text-xs sm:text-sm text-slate-500 max-w-xl">
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl">
                     Keahlian praktis yang siap diterapkan pada operasional infrastruktur IT perusahaan, helpdesk workstation, dan automasi sistem.
                 </p>
             </div>
@@ -317,12 +512,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 <!-- Pillar 1 -->
-                <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50 space-y-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white flex items-center justify-center font-bold text-xs">
                         OS
                     </div>
-                    <h3 class="text-sm font-bold text-slate-900">Operating Systems &amp; Hardening</h3>
-                    <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white">Operating Systems &amp; Hardening</h3>
+                    <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 leading-relaxed">
                         <li>• Windows 11 Enterprise Baseline</li>
                         <li>• Group Policy (GPO) &amp; Registry Tuning</li>
                         <li>• Linux Ubuntu Server &amp; Debian</li>
@@ -332,12 +527,12 @@
                 </div>
 
                 <!-- Pillar 2 -->
-                <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50 space-y-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white flex items-center justify-center font-bold text-xs">
                         CLI
                     </div>
-                    <h3 class="text-sm font-bold text-slate-900">Automation &amp; Scripting</h3>
-                    <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white">Automation &amp; Scripting</h3>
+                    <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 leading-relaxed">
                         <li>• PowerShell (WMI/CIM, WinRM, CIMInstance)</li>
                         <li>• Bash Scripting &amp; Sysfs Interrogation</li>
                         <li>• Python 3.10 - 3.14 (FastAPI, Asyncio)</li>
@@ -347,12 +542,12 @@
                 </div>
 
                 <!-- Pillar 3 -->
-                <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50 space-y-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white flex items-center justify-center font-bold text-xs">
                         NET
                     </div>
-                    <h3 class="text-sm font-bold text-slate-900">Networking &amp; Protocols</h3>
-                    <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white">Networking &amp; Protocols</h3>
+                    <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 leading-relaxed">
                         <li>• Layer 2/3 LAN Architecture &amp; Subnetting</li>
                         <li>• ARP, NetBIOS (137) &amp; mDNS (5353)</li>
                         <li>• GPON Optical Gateway Configuration</li>
@@ -362,12 +557,12 @@
                 </div>
 
                 <!-- Pillar 4 -->
-                <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50 space-y-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                <div class="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white flex items-center justify-center font-bold text-xs">
                         ITAM
                     </div>
-                    <h3 class="text-sm font-bold text-slate-900">ITAM &amp; Physical Operations</h3>
-                    <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white">ITAM &amp; Physical Operations</h3>
+                    <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 leading-relaxed">
                         <li>• Physical Asset Tagging (Code 128 / QR)</li>
                         <li>• Thermal Label Printing (50x30mm)</li>
                         <li>• Hardware Lifecycle &amp; Assignment Tracking</li>
@@ -381,20 +576,183 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="mt-auto border-t border-slate-200 bg-white py-8">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <div>
-                <span class="font-bold text-slate-900">Chaerul Hidayat</span> · Bandung, Indonesia
+    <!-- CONTACT & FOOTER -->
+    <footer id="contact" class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-10 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-1 text-center md:text-left">
+                <div class="text-sm font-extrabold text-slate-900 dark:text-white">Chaerul Hidayat</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">Enterprise IT Systems &amp; Infrastructure Engineering · Bandung, Indonesia</div>
             </div>
-            <div class="flex items-center gap-4 font-semibold text-slate-700">
-                <a href="https://github.com/ChaerulHidayat17" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition">GitHub</a>
-                <a href="https://linkedin.com/in/chaerul-hidayat" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition">LinkedIn</a>
-                <a href="mailto:chaerulhidayat70@gmail.com" class="hover:text-slate-900 transition">Email</a>
-                <a href="https://t.me/ChaerulHidayat" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition">Telegram</a>
+
+            <div class="flex items-center gap-3 text-xs font-semibold">
+                <a href="https://github.com/ChaerulHidayat17" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition">GitHub</a>
+                <a href="https://linkedin.com/in/chaerul-hidayat" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition">LinkedIn</a>
+                <a href="mailto:chaerulhidayat70@gmail.com" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition">Email</a>
+                <a href="https://t.me/ChaerulHidayat" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition">Telegram</a>
             </div>
         </div>
     </footer>
 
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Theme Management
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+        initTheme();
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2.5 rounded-xl shadow-xl text-xs font-bold flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto border border-slate-800 dark:border-slate-200';
+            toast.innerHTML = `
+                <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>${msg}</span>
+            `;
+            container.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        function copyContactEmail() {
+            navigator.clipboard.writeText('chaerulhidayat70@gmail.com');
+            showToast('Email chaerulhidayat70@gmail.com disalin ke clipboard');
+            const btn = document.getElementById('copy-email-btn');
+            btn.innerText = 'Tersalin!';
+            setTimeout(() => btn.innerText = 'Salin Email', 2000);
+        }
+
+        // Terminal Simulator Tabs
+        const terminalData = {
+            deskcraft: {
+                tab: 'term-tab-1',
+                cmd: 'irm https://it-setup-portal-app.vercel.app/run | iex',
+                output: `
+                    <div class="text-blue-400">[+] Verifying Administrator Integrity... Elevated OK</div>
+                    <div class="text-emerald-400">[+] Winget Package Engine initialized</div>
+                    <div>[1/4] Installing Google Chrome Enterprise... <span class="text-emerald-400">Done (32s)</span></div>
+                    <div>[2/4] Deploying Slack &amp; Zoom Workplace... <span class="text-emerald-400">Done (41s)</span></div>
+                    <div>[3/4] Enforcing Cloudflare 1.1.1.1 Secure DNS... <span class="text-emerald-400">Done</span></div>
+                    <div>[4/4] Applying Windows 11 Privacy Baseline... <span class="text-emerald-400">Done</span></div>
+                    <div class="text-emerald-300 font-bold pt-1">[SUCCESS] Workstation provisioned in 2m 14s (0 disk leftovers)</div>
+                `
+            },
+            assetdesk: {
+                tab: 'term-tab-2',
+                cmd: 'irm http://192.168.1.10:8050/audit.ps1?dept=Finance | iex',
+                output: `
+                    <div class="text-blue-400">[*] Interrogating BIOS &amp; WMI System Architecture...</div>
+                    <div>- Hostname   : PC-FINANCE-02</div>
+                    <div>- Serial No  : <span class="text-amber-400">0225080020365100746</span> (Verified BIOS)</div>
+                    <div>- CPU        : 12th Gen Intel Core i3-1215U (6 Cores)</div>
+                    <div>- RAM &amp; Disk : 12.0 GB DDR4 | FORESEE NVMe SSD 512GB</div>
+                    <div>- OS Build   : Windows 11 Pro 64-bit (Build 26200)</div>
+                    <div class="text-emerald-400">[*] Posting telemetry payload to AssetDesk Central API...</div>
+                    <div class="text-emerald-300 font-bold pt-1">[SUCCESS] Asset AST-2026-0007 enrolled into Division Finance!</div>
+                `
+            },
+            nodepulse: {
+                tab: 'term-tab-3',
+                cmd: 'curl -s http://192.168.1.10:9090/api/telemetry | jq',
+                output: `
+                    <div class="text-blue-400">[*] Reading Linux kernel sysfs /sys/class/power_supply/BAT0...</div>
+                    <div>{</div>
+                    <div>  "hostname": "chaerulhidayat-headless",</div>
+                    <div>  "cpu_utilization_pct": 4.2,</div>
+                    <div>  "memory_used_mb": 1840, "memory_total_mb": 8192,</div>
+                    <div>  "battery_capacity_pct": 85,</div>
+                    <div>  "power_consumption_watts": 14.2,</div>
+                    <div>  "thermal_zone0_celsius": 44.0,</div>
+                    <div>  "status": "<span class="text-emerald-400">HEALTHY_CONTINUOUS_24x7</span>"</div>
+                    <div>}</div>
+                `
+            }
+        };
+
+        let currentActiveTerm = 'deskcraft';
+        function runTerminalTab(key) {
+            currentActiveTerm = key;
+            ['term-tab-1', 'term-tab-2', 'term-tab-3'].forEach(id => {
+                document.getElementById(id).className = "px-2 py-0.5 rounded hover:bg-slate-800 text-slate-400 transition cursor-pointer";
+            });
+            const data = terminalData[key];
+            document.getElementById(data.tab).className = "px-2 py-0.5 rounded bg-slate-800 text-emerald-400 transition cursor-pointer";
+            document.getElementById('term-cmd').innerText = data.cmd;
+            document.getElementById('term-output').innerHTML = data.output;
+        }
+
+        function copyCurrentTerminalCmd() {
+            const cmd = terminalData[currentActiveTerm].cmd;
+            navigator.clipboard.writeText(cmd);
+            showToast('Command terminal disalin ke clipboard');
+        }
+
+        // Deskcraft Role Preset Switcher
+        const deskcraftPresets = {
+            office: 'irm "https://it-setup-portal-app.vercel.app/run?apps=chrome,zoom,slack,7zip" | iex',
+            engineer: 'irm "https://it-setup-portal-app.vercel.app/run?apps=vscode,git,docker,postman,terminal" | iex',
+            support: 'irm "https://it-setup-portal-app.vercel.app/run?apps=anydesk,wireshark,putty,sysinternals,hwinfo" | iex',
+            creative: 'irm "https://it-setup-portal-app.vercel.app/run?apps=figma,obs,vlc,gimp,handbrake" | iex'
+        };
+
+        function setDeskcraftRole(role) {
+            ['role-btn-office', 'role-btn-engineer', 'role-btn-support', 'role-btn-creative'].forEach(id => {
+                document.getElementById(id).className = "px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition cursor-pointer";
+            });
+            document.getElementById(`role-btn-${role}`).className = "px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-900 dark:bg-white text-white dark:text-slate-900 transition cursor-pointer";
+            document.getElementById('deskcraft-cmd-snippet').innerText = deskcraftPresets[role];
+        }
+
+        function copyDeskcraftCmd() {
+            const cmd = document.getElementById('deskcraft-cmd-snippet').innerText.trim();
+            navigator.clipboard.writeText(cmd);
+            showToast('Skrip provisioning DeskCraft berhasil disalin');
+        }
+
+        // Interactive Barcode & QR Demo for AssetDesk Bento
+        let demoQr = null;
+        function renderDemoBarcode() {
+            const val = document.getElementById('interactive-tag-input').value.trim() || 'AST-2026-0001';
+            
+            try {
+                JsBarcode("#demo-barcode-svg", val, {
+                    format: "CODE128",
+                    width: 1.2,
+                    height: 28,
+                    displayValue: false
+                });
+            } catch(e) {}
+
+            const qrBox = document.getElementById('demo-qr-box');
+            qrBox.innerHTML = '';
+            demoQr = new QRCode(qrBox, {
+                text: val,
+                width: 36,
+                height: 36,
+                correctLevel: QRCode.CorrectLevel.L
+            });
+        }
+        window.addEventListener('DOMContentLoaded', renderDemoBarcode);
+    </script>
 </body>
 </html>
