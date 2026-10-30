@@ -1,7 +1,7 @@
-# 🌐 Chaerul Hidayat — IT Support Specialist | Workflow Automation | AI-Driven Helpdesk
+# 🌐 Chaerul Hidayat — IT Support &amp; Helpdesk Portfolio
 
-> Technical portfolio of **Chaerul Hidayat** ([@ChaerulHidayat17](https://github.com/ChaerulHidayat17)).  
-> Specializing in enterprise zero-touch workstation provisioning, automated IT asset management (ITAM), and AI-driven helpdesk operations.
+> Portfolio teknis **Chaerul Hidayat** ([@ChaerulHidayat17](https://github.com/ChaerulHidayat17)).  
+> Berfokus pada IT Support, troubleshooting sistem operasi (Windows &amp; Linux), pemeliharaan hardware, jaringan komputer, dan otomasi skrip.
 
 🌐 **Live Portfolio Website**: [https://chaerulhidayat17.github.io/portfolio/](https://chaerulhidayat17.github.io/portfolio/)  
 💼 **LinkedIn**: [https://linkedin.com/in/chaerulhdyt](https://linkedin.com/in/chaerulhdyt)  
