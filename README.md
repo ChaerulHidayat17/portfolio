@@ -3,7 +3,10 @@
 > Technical portfolio of **Chaerul Hidayat** ([@ChaerulHidayat17](https://github.com/ChaerulHidayat17)) based in **Cikarang Utara, West Java, Indonesia**.  
 > Specializing in enterprise zero-touch workstation provisioning, automated IT asset management (ITAM), and AI-driven helpdesk operations.
 
-🌐 **Live Portfolio Website**: [https://chaerulhidayat17.github.io/portfolio/](https://chaerulhidayat17.github.io/portfolio/)
+🌐 **Live Portfolio Website**: [https://chaerulhidayat17.github.io/portfolio/](https://chaerulhidayat17.github.io/portfolio/)  
+💼 **LinkedIn**: [https://linkedin.com/in/chaerulhdyt](https://linkedin.com/in/chaerulhdyt)  
+💬 **WhatsApp**: [+62 821-1361-4887](https://wa.me/6282113614887)  
+✉️ **Email**: chaerulhidayat70@gmail.com
 
 ---
 
