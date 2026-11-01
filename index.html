@@ -422,7 +422,7 @@
                     <!-- Dynamic One-Liner Snippet Box -->
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-3 text-xs font-mono">
                         <div class="truncate text-emerald-400 select-all" id="deskcraft-cmd-snippet">
-                            irm "https://it-setup-portal-app.vercel.app/run?apps=chrome,zoom,slack,7zip" | iex
+                            irm "https://deskcraft-lake.vercel.app/run?apps=chrome,zoom,slack,7zip" | iex
                         </div>
                         <button onclick="copyDeskcraftCmd()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-sans font-semibold shrink-0 transition cursor-pointer">
                             Salin
@@ -437,7 +437,7 @@
                 </div>
 
                 <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <a href="https://it-setup-portal-app.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
+                    <a href="https://deskcraft-lake.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
                         Buka Live Web App
                     </a>
                     <a href="https://github.com/ChaerulHidayat17/deskcraft" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center transition">
@@ -454,7 +454,7 @@
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                             HARDWARE INVENTORY (ITAM)
                         </span>
-                        <span class="text-xs font-mono text-slate-400">Port 8050</span>
+                        <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold">Live Web App</span>
                     </div>
 
                     <div>
@@ -491,8 +491,11 @@
                 </div>
 
                 <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <a href="https://github.com/ChaerulHidayat17/assetdesk" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
-                        Lihat Dokumentasi &amp; Kode
+                    <a href="https://assetdesk-cyan.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
+                        Buka Live Web App
+                    </a>
+                    <a href="https://github.com/ChaerulHidayat17/assetdesk" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center transition">
+                        GitHub Repo
                     </a>
                 </div>
             </div>
@@ -554,7 +557,7 @@
                             <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
                             HOMELAB &amp; SERVER TELEMETRY
                         </span>
-                        <span class="text-xs font-mono text-slate-400">Port 9090</span>
+                        <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold">Live Web App</span>
                     </div>
 
                     <div>
@@ -593,8 +596,11 @@
                 </div>
 
                 <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <a href="https://github.com/ChaerulHidayat17/nodepulse" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
-                        Lihat Dokumentasi &amp; Kode
+                    <a href="https://nodepulse-rho.vercel.app" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold text-center transition shadow-xs">
+                        Buka Live Web App
+                    </a>
+                    <a href="https://github.com/ChaerulHidayat17/nodepulse" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center transition">
+                        GitHub Repo
                     </a>
                 </div>
             </div>
@@ -840,7 +846,7 @@
             },
             deskcraft: {
                 tab: 'term-tab-1',
-                cmd: 'irm https://it-setup-portal-app.vercel.app/run | iex',
+                cmd: 'irm https://deskcraft-lake.vercel.app/run | iex',
                 output: `
                     <div class="text-blue-400">[+] Verifying Administrator Integrity... Elevated OK</div>
                     <div class="text-emerald-400">[+] Winget Package Engine initialized</div>
@@ -853,7 +859,7 @@
             },
             assetdesk: {
                 tab: 'term-tab-2',
-                cmd: 'irm http://192.168.1.10:8050/audit.ps1?dept=Finance | iex',
+                cmd: 'irm https://assetdesk-cyan.vercel.app/audit.ps1?dept=Finance | iex',
                 output: `
                     <div class="text-blue-400">[*] Interrogating BIOS &amp; WMI System Architecture...</div>
                     <div>- Hostname   : PC-FINANCE-02</div>
@@ -890,10 +896,10 @@
 
         // Deskcraft Role Preset Switcher
         const deskcraftPresets = {
-            office: 'irm "https://it-setup-portal-app.vercel.app/run?apps=chrome,zoom,slack,7zip" | iex',
-            engineer: 'irm "https://it-setup-portal-app.vercel.app/run?apps=vscode,git,docker,postman,terminal" | iex',
-            support: 'irm "https://it-setup-portal-app.vercel.app/run?apps=anydesk,wireshark,putty,sysinternals,hwinfo" | iex',
-            creative: 'irm "https://it-setup-portal-app.vercel.app/run?apps=figma,obs,vlc,gimp,handbrake" | iex'
+            office: 'irm "https://deskcraft-lake.vercel.app/run?apps=chrome,zoom,slack,7zip" | iex',
+            engineer: 'irm "https://deskcraft-lake.vercel.app/run?apps=vscode,git,docker,postman,terminal" | iex',
+            support: 'irm "https://deskcraft-lake.vercel.app/run?apps=anydesk,wireshark,putty,sysinternals,hwinfo" | iex',
+            creative: 'irm "https://deskcraft-lake.vercel.app/run?apps=figma,obs,vlc,gimp,handbrake" | iex'
         };
 
         function setDeskcraftRole(role) {
